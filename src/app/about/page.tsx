@@ -30,14 +30,14 @@ export default function AboutPage() {
           <span className="mission-eyebrow">Our Purpose</span>
           <div className="mission-grid">
             <div className="mission-card mission-card--yellow">
-              <div className="mission-card-label">Mission</div>
+              <h3 className="mission-card-label">Mission</h3>
               <p className="mission-card-text">
                 To empower Malaysian organisations with practical, accessible and high-quality
                 training and consultancy.
               </p>
             </div>
             <div className="mission-card mission-card--glass">
-              <div className="mission-card-label">Vision</div>
+              <h3 className="mission-card-label">Vision</h3>
               <p className="mission-card-text">
                 To be Malaysia’s most trusted multi-discipline training and consultancy partner.
               </p>
