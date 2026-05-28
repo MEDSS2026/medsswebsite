@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 
 const team = [
   {
-    name: 'Full Name',
-    role: 'Founder & Director',
+    name: 'Full Name',              // ← replace with real name
+    role: 'Founder & Director',     // ← replace with real role
     bio: 'Replace with a 2–3 sentence bio covering experience, specialisation and what they bring to MEDSS clients.',
-    photo: '/assets/team/person-1.jpg',
+    photo: '/assets/team/person-1.jpg', // ← replace with real filename
   },
   {
     name: 'Full Name',
@@ -39,7 +39,7 @@ const team = [
 export default function AboutPage() {
   return (
     <>
-      {/* 1 -- Hero */}
+      {/* 1 ── Hero */}
       <section className="page-hero">
         <div className="container">
           <div className="breadcrumb">Home / About</div>
@@ -51,7 +51,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 2 -- Mission & Vision */}
+      {/* 2 ── Mission & Vision */}
       <section className="mission-section">
         <div className="container">
           <span className="mission-eyebrow">Our Purpose</span>
@@ -73,7 +73,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 3 -- Company Story */}
+      {/* 3 ── Company Story */}
       <section className="section">
         <div className="container split">
           <div>
@@ -85,7 +85,7 @@ export default function AboutPage() {
               matters — safety, HR, security and management systems.
             </p>
             <p>
-              Over the years we've grown from a specialist training provider into a full-service
+              Over the years we&apos;ve grown from a specialist training provider into a full-service
               consultancy, serving clients across manufacturing, logistics, construction and
               corporate sectors nationwide.
             </p>
@@ -104,7 +104,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4 -- Team */}
+      {/* 4 ── Team */}
       <section className="team-section">
         <div className="container">
           <div className="team-section-header">
@@ -113,7 +113,7 @@ export default function AboutPage() {
           </div>
           <div className="team-grid">
             {team.map((member) => (
-              <div className="team-card" key={member.name}>
+              <div className="team-card" key={member.role}>
                 <img
                   className="team-card-photo"
                   src={member.photo}
