@@ -58,14 +58,14 @@ export default function AboutPage() {
           <span className="mission-eyebrow">Our Purpose</span>
           <div className="mission-grid">
             <div className="mission-card mission-card--yellow">
-              <h3 className="mission-card-label">Mission</h3>
+              <p className="mission-card-label">Mission</p>
               <p className="mission-card-text">
                 To empower Malaysian organisations with practical, accessible and high-quality
                 training and consultancy.
               </p>
             </div>
             <div className="mission-card mission-card--glass">
-              <h3 className="mission-card-label">Vision</h3>
+              <p className="mission-card-label">Vision</p>
               <p className="mission-card-text">
                 To be Malaysia&apos;s most trusted multi-discipline training and consultancy partner.
               </p>
@@ -160,7 +160,7 @@ export default function AboutPage() {
             <div className="card">
               <div className="icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <h3>Flexible Support</h3>

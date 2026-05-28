@@ -512,6 +512,13 @@ h3 {
   font-size: clamp(30px, 4vw, 46px);
 }
 
+.cta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 40px;
+}
+
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
