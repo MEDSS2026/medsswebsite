@@ -66,7 +66,7 @@ export default function AboutPage() {
             <div className="mission-card mission-card--glass">
               <h3 className="mission-card-label">Vision</h3>
               <p className="mission-card-text">
-                To be Malaysia's most trusted multi-discipline training and consultancy partner.
+                To be Malaysia&apos;s most trusted multi-discipline training and consultancy partner.
               </p>
             </div>
           </div>
@@ -126,6 +126,60 @@ export default function AboutPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5 ── Strengths */}
+      <section className="section section-light">
+        <div className="container">
+          <div className="section-head">
+            <span className="eyebrow">Our Strengths</span>
+            <h2>A multi-disciplinary partner for business needs</h2>
+          </div>
+          <div className="grid-3">
+            <div className="card">
+              <div className="icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3>Practical Delivery</h3>
+              <p>Training and advisory content is structured for clear learning, practical application and workplace relevance.</p>
+            </div>
+            <div className="card">
+              <div className="icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
+              <h3>Compliance Awareness</h3>
+              <p>Programmes and consulting cover HR, safety, environment, security and recognised management systems.</p>
+            </div>
+            <div className="card">
+              <div className="icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
+              <h3>Flexible Support</h3>
+              <p>MEDSS supports both in-house and public training needs with enquiry channels for fast coordination.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6 ── CTA */}
+      <section className="section">
+        <div className="container">
+          <div className="cta">
+            <div>
+              <h2>Build a safer and better prepared workforce.</h2>
+              <p>Talk to MEDSS about your organisation&apos;s training or consultancy requirements.</p>
+            </div>
+            <a className="btn btn-primary" href="/contact">
+              Send Enquiry
+            </a>
           </div>
         </div>
       </section>
