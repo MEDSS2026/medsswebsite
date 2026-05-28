@@ -1827,7 +1827,7 @@ h3 {
 }
 
 .mission-card--glass .mission-card-text {
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 @media (max-width: 700px) {
@@ -1846,7 +1846,7 @@ h3 {
 
 .story-badge {
   display: inline-block;
-  background: #eef1f9;
+  background: rgba(33, 64, 154, 0.06);
   color: var(--blue);
   border: 1px solid var(--border);
   border-radius: 100px;
