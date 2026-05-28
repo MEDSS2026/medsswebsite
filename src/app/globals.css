@@ -5,6 +5,7 @@
   --text: #26324a;
   --muted: #64708a;
   --light: #f6f8fc;
+  --surface: #f0f2f8;
   --white: #ffffff;
   --border: #dce3f2;
   --shadow: 0 18px 45px rgba(13, 27, 61, 0.12);
@@ -936,7 +937,7 @@ h3 {
 /* ── Why Choose MEDSS ── */
 /* ── Why Choose MEDSS — Bento Grid ── */
 .why-bento-section {
-  background: #f0f2f8;
+  background: var(--surface);
   padding: 96px 0;
 }
 
@@ -1859,7 +1860,7 @@ h3 {
 
 /* ── About: Team ── */
 .team-section {
-  background: #f0f2f8;
+  background: var(--surface);
   padding: 84px 0;
 }
 
@@ -1918,8 +1919,8 @@ h3 {
 }
 
 .team-card-role {
-  font-size: 10px;
-  font-weight: 800;
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--yellow);
@@ -1934,6 +1935,10 @@ h3 {
 }
 
 @media (max-width: 900px) {
+  .team-section {
+    padding: 64px 0;
+  }
+
   .team-grid {
     grid-template-columns: repeat(2, 1fr);
   }
