@@ -1856,3 +1856,91 @@ h3 {
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
+
+/* ── About: Team ── */
+.team-section {
+  background: #f0f2f8;
+  padding: 84px 0;
+}
+
+.team-section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.team-section-header .eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.team-section-header h2 {
+  font-size: clamp(28px, 3.2vw, 44px);
+  color: var(--dark);
+  margin: 0;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.team-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(13, 27, 61, 0.06);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(13, 27, 61, 0.12);
+}
+
+.team-card-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+.team-card-info {
+  padding: 20px;
+}
+
+.team-card-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--dark);
+  margin: 0 0 4px;
+}
+
+.team-card-role {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--yellow);
+  margin: 0 0 10px;
+}
+
+.team-card-bio {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
