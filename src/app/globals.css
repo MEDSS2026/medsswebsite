@@ -719,13 +719,19 @@ h3 {
 }
 
 .hero-glass .badges {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
   margin-top: 0;
 }
 
 .hero-glass .badges img {
+  max-height: 72px;
+  width: auto;
   background: var(--white);
-  padding: 10px;
-  border-radius: 12px;
+  padding: 8px;
+  border-radius: 10px;
 }
 
 .hero-actions,
