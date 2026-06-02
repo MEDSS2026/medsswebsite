@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { Montserrat, Outfit } from 'next/font/google';
 import './globals.css';
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
+import { ConditionalShell } from '@/components/conditional-shell';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -40,10 +39,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${montserrat.variable} ${outfit.variable}`}>
+      <head>
+        <link rel="preload" as="image" href="/assets/training/hero-road-safety.jpg" />
+      </head>
       <body>
-        <SiteHeader />
-        <main>{children}</main>
-        <SiteFooter />
+        <ConditionalShell>{children}</ConditionalShell>
       </body>
     </html>
   );

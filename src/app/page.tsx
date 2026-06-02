@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { ClientMarquee } from '@/components/client-marquee';
+import { ReviewForm } from '@/components/review-form';
+import { Testimonials } from '@/components/testimonials';
 
 const stats = [
   { label: 'Claimable training programmes', value: 'HRDC' },
@@ -30,7 +32,7 @@ const serviceHighlights = [
 ];
 
 export const metadata: Metadata = {
-  title: 'HRDC Claimable Training Malaysia',
+  title: 'MEDSS Training and Consultancy',
   description:
     'MEDSS helps Malaysian organisations improve safety, HR, security readiness and management systems through HRDC claimable training and consultancy.',
   keywords: [
@@ -52,7 +54,7 @@ export default function HomePage() {
         <div className="container">
           <div>
             <span className="eyebrow">HRDC Claimable Training Provider</span>
-            <h1>Empower Your Workforce.<br />Ensure <span className="text-yellow">Compliance.</span></h1>
+            <h1>Empowerment Fuels Excellence.<br />Ensure <span className="text-yellow">Compliance.</span></h1>
             <p>
               MEDSS helps Malaysian organisations improve safety, human resources, security readiness and management
               systems through practical training programmes and professional consulting services.
@@ -154,23 +156,23 @@ export default function HomePage() {
       <section className="stats-strip">
         <div className="container stats-grid">
           <div className="stat-item">
-            <strong>10+</strong>
-            <span>Years of industry experience</span>
-          </div>
-          <div className="stat-divider" aria-hidden="true" />
-          <div className="stat-item">
             <strong>50+</strong>
             <span>HRDC claimable programmes</span>
           </div>
           <div className="stat-divider" aria-hidden="true" />
           <div className="stat-item">
-            <strong>200+</strong>
-            <span>Organisations trained</span>
+            <strong>4</strong>
+            <span>Core service pillars</span>
           </div>
           <div className="stat-divider" aria-hidden="true" />
           <div className="stat-item">
-            <strong>4</strong>
-            <span>Core service pillars</span>
+            <strong>HRD Corp</strong>
+            <span>Registered training provider</span>
+          </div>
+          <div className="stat-divider" aria-hidden="true" />
+          <div className="stat-item">
+            <strong>Malaysia</strong>
+            <span>In-house &amp; public delivery nationwide</span>
           </div>
         </div>
       </section>
@@ -193,12 +195,6 @@ export default function HomePage() {
               <h4>HRDC Claimable</h4>
               <p>All eligible programmes claimable under HRD Corp for Malaysian employers.</p>
               <span className="why-tile-badge">HRD Corp Registered</span>
-            </div>
-
-            {/* 200+ stat — yellow tile */}
-            <div className="why-tile why-tile--yellow">
-              <strong className="why-tile-stat">200+</strong>
-              <span className="why-tile-stat-label">Organisations<br />Trained</span>
             </div>
 
             {/* Industry Practitioners — white tile */}
@@ -243,8 +239,8 @@ export default function HomePage() {
               <p>Serving clients across Peninsular Malaysia and East Malaysia.</p>
             </div>
 
-            {/* Customised Programmes — wide white tile spanning 2 cols */}
-            <div className="why-tile why-tile--white why-tile--wide why-tile--cta-row">
+            {/* Customised Programmes — full width tile spanning 3 cols */}
+            <div className="why-tile why-tile--white why-tile--full why-tile--cta-row">
               <div>
                 <h4>Customised Programmes</h4>
                 <p>Training designed around your organisation's specific needs and industry sector.</p>
@@ -357,50 +353,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Testimonials ── */}
-      <section className="testimonials-section">
-        <div className="container">
-          <div className="testimonials-header">
-            <span className="eyebrow">Client Feedback</span>
-            <h2>Trusted by organisations<br />across Malaysia.</h2>
-          </div>
-          <div className="testimonials-grid">
-            <div className="testi-card">
-              <div className="testi-stars" aria-label="5 stars">★★★★★</div>
-              <p className="testi-quote">"The HIRAC training was practical and immediately applicable. Our safety committee walked away with a clear process they could implement the very next week."</p>
-              <div className="testi-author">
-                <div className="testi-avatar" aria-hidden="true">AH</div>
-                <div>
-                  <strong>Ahmad H.</strong>
-                  <span>Safety &amp; Health Officer, Manufacturing Sector</span>
-                </div>
-              </div>
-            </div>
-            <div className="testi-card">
-              <div className="testi-stars" aria-label="5 stars">★★★★★</div>
-              <p className="testi-quote">"MEDSS delivered our domestic inquiry training in-house and tailored it to our actual HR cases. Exactly what we needed — not a generic slide deck."</p>
-              <div className="testi-author">
-                <div className="testi-avatar" aria-hidden="true">RL</div>
-                <div>
-                  <strong>Rachel L.</strong>
-                  <span>HR Manager, Logistics &amp; Warehousing</span>
-                </div>
-              </div>
-            </div>
-            <div className="testi-card">
-              <div className="testi-stars" aria-label="5 stars">★★★★★</div>
-              <p className="testi-quote">"Claiming through HRD Corp was straightforward and the MEDSS team handled all the paperwork. The security compliance programme helped us pass our TAPA audit."</p>
-              <div className="testi-author">
-                <div className="testi-avatar" aria-hidden="true">SK</div>
-                <div>
-                  <strong>Siti K.</strong>
-                  <span>Compliance Manager, Supply Chain</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Testimonials />
+
+      <ReviewForm />
 
       {/* ── Industries We Serve ── */}
       <section className="industries-section">
@@ -477,7 +432,7 @@ export default function HomePage() {
               <ul className="cta-full-trust">
                 <li>HRDC Claimable programmes</li>
                 <li>In-house &amp; public delivery formats</li>
-                <li>200+ organisations served nationwide</li>
+
                 <li>Response within 24 hours</li>
               </ul>
             </div>

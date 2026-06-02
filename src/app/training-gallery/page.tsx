@@ -38,6 +38,8 @@ const clientLogos = [
   { src: '/assets/clients/twc.png',         alt: 'TWC' },
   { src: '/assets/clients/vanguards.png',   alt: 'Vanguards' },
   { src: '/assets/clients/visions.png',     alt: 'Visions' },
+  { src: '/assets/clients/ht-logistics.png', alt: 'HT Logistics' },
+  { src: '/assets/clients/shield-security.png', alt: 'Shield Security' },
 ];
 
 export default function TrainingGalleryPage() {
@@ -147,6 +149,44 @@ export default function TrainingGalleryPage() {
               <div key={logo.src} className="portfolio-client-logo">
                 <img src={logo.src} alt={logo.alt} loading="lazy" />
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Promotional Flyers ── */}
+      <section className="flyers-section">
+        <div className="container">
+          <div className="flyers-header">
+            <span className="eyebrow">Programme Flyers</span>
+            <h2>Download Our Training Flyers</h2>
+            <p className="flyers-subhead">Click any flyer below to view or download the full programme details.</p>
+          </div>
+          <div className="flyers-grid">
+            {[
+              { file: 'Basic Chemical Safe Handling Training.pdf', title: 'Basic Chemical Safe Handling' },
+              { file: 'Conducting Effective Domestic Enquiry Training.pdf', title: 'Conducting Effective Domestic Enquiry' },
+              { file: 'Defensive Driving Heavy Vehicle Training.pdf', title: 'Defensive Driving — Heavy Vehicle' },
+              { file: 'Lock Out Tag Out.pdf', title: 'Lock Out Tag Out (LOTO)' },
+              { file: 'Supply Chain Security.pdf', title: 'Supply Chain Security' },
+              { file: 'Warehouse Process Improvement.pdf', title: 'Warehouse Process Improvement' },
+            ].map(({ file, title }) => (
+              <a
+                key={file}
+                href={`/assets/flyers/${encodeURIComponent(file)}`}
+                target="_blank"
+                rel="noreferrer"
+                className="flyer-card"
+              >
+                <div className="flyer-card-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M13 3v5a1 1 0 001 1h5M9 13h6M9 17h4" strokeLinecap="round"/>
+                  </svg>
+                </div>
+                <span className="flyer-card-title">{title}</span>
+                <span className="flyer-card-action">View Flyer →</span>
+              </a>
             ))}
           </div>
         </div>

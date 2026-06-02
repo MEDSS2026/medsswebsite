@@ -13,6 +13,8 @@ const clients = [
   { src: '/assets/clients/vanguards.png', alt: 'The Vanguards Logistics' },
   { src: '/assets/clients/microenergy.png', alt: 'Microenergy' },
   { src: '/assets/clients/bmi.png', alt: 'BMI' },
+  { src: '/assets/clients/shield-security.png', alt: 'Shield Security' },
+  { src: '/assets/clients/ht-logistics.png', alt: 'HT Logistics' },
 ];
 
 export function ClientMarquee() {

@@ -69,6 +69,13 @@ export function SiteHeader() {
               </svg>
               <span>WhatsApp</span>
             </a>
+            <span className="divider" aria-hidden="true">|</span>
+            <a className="contact-link" href="tel:+60321169762">
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 01.97-.26 11.36 11.36 0 003.56.57 1 1 0 011 1v3.58a1 1 0 01-1 1A16.62 16.62 0 013 5a1 1 0 011-1h3.57a1 1 0 011 1 11.36 11.36 0 00.57 3.56 1 1 0 01-.26.97z" />
+              </svg>
+              <span>03-2116 9762</span>
+            </a>
           </div>
         </div>
       </div>

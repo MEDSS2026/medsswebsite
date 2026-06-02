@@ -10,32 +10,6 @@ export const metadata: Metadata = {
   },
 };
 
-const team = [
-  {
-    name: 'Full Name',              // ← replace with real name
-    role: 'Founder & Director',     // ← replace with real role
-    bio: 'Replace with a 2–3 sentence bio covering experience, specialisation and what they bring to MEDSS clients.',
-    photo: '/assets/team/person-1.jpg', // ← replace with real filename
-  },
-  {
-    name: 'Full Name',
-    role: 'Lead Trainer',
-    bio: 'Replace with a 2–3 sentence bio covering experience, specialisation and what they bring to MEDSS clients.',
-    photo: '/assets/team/person-2.jpg',
-  },
-  {
-    name: 'Full Name',
-    role: 'HR Consultant',
-    bio: 'Replace with a 2–3 sentence bio covering experience, specialisation and what they bring to MEDSS clients.',
-    photo: '/assets/team/person-3.jpg',
-  },
-  {
-    name: 'Full Name',
-    role: 'OSH Specialist',
-    bio: 'Replace with a 2–3 sentence bio covering experience, specialisation and what they bring to MEDSS clients.',
-    photo: '/assets/team/person-4.jpg',
-  },
-];
 
 export default function AboutPage() {
   return (
@@ -62,7 +36,7 @@ export default function AboutPage() {
               <div className="facts-list">
                 <div className="fact-row">
                   <span className="fact-label">Founded</span>
-                  <span className="fact-value">2014</span>
+                  <span className="fact-value">2023</span>
                 </div>
                 <div className="fact-row">
                   <span className="fact-label">Headquarters</span>
@@ -139,13 +113,14 @@ export default function AboutPage() {
             <span className="eyebrow">Our Story</span>
             <h2>Built to strengthen workplaces across Malaysia</h2>
             <p>
-              MEDSS was established in 2014 with a single goal: make high-quality, structured
-              training and expert consultancy genuinely accessible to Malaysian organisations.
-              From day one, we focused on the disciplines that matter most — workplace safety,
-              legal compliance, HR frameworks and management system certification.
+              Formerly known as MED Systems Solutions, MEDSS began as a consultancy practice —
+              supporting Malaysian organisations with HR, safety and management system advisory.
+              Upon the request of training from our trusted clients, we evolved into
+              MEDSS Training and Consultancy Sdn. Bhd., adding structured training programmes
+              to our offering starting from 2023.
             </p>
             <p>
-              We deliver everything under one roof. Whether your team needs OSHA compliance
+              Today we deliver everything under one roof. Whether your team needs OSHA compliance
               training, security management, an ISO certification pathway or tailored HR
               consultancy, MEDSS handles it end-to-end — with practitioners who have worked
               inside the industries they train.
@@ -153,7 +128,7 @@ export default function AboutPage() {
 
             <div className="story-stats">
               <div className="story-stat">
-                <span className="story-stat-num">2014</span>
+                <span className="story-stat-num">2023</span>
                 <span className="story-stat-label">Established</span>
               </div>
               <div className="story-stat">
@@ -167,10 +142,10 @@ export default function AboutPage() {
             </div>
 
             <p>
-              Over a decade of delivery, we&apos;ve grown into a full-service consultancy trusted
-              by organisations across manufacturing, logistics, construction and corporate
-              sectors nationwide. Every programme is HRD Corp claimable — keeping training
-              accessible for businesses of every size.
+              Since 2023, we have grown into a full-service consultancy trusted by organisations
+              across manufacturing, logistics, construction and corporate sectors nationwide.
+              Every programme is HRD Corp claimable — keeping training accessible for businesses
+              of every size.
             </p>
 
             <div className="story-badges">
@@ -318,31 +293,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 6 ── Team */}
-      <section className="team-section">
-        <div className="container">
-          <div className="team-section-header">
-            <span className="eyebrow">The Team</span>
-            <h2>People who make it happen</h2>
-          </div>
-          <div className="team-grid">
-            {team.map((member) => (
-              <div className="team-card" key={member.role}>
-                <img
-                  className="team-card-photo"
-                  src={member.photo}
-                  alt={member.name}
-                />
-                <div className="team-card-info">
-                  <p className="team-card-name">{member.name}</p>
-                  <p className="team-card-role">{member.role}</p>
-                  <p className="team-card-bio">{member.bio}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 5 ── Strengths */}
       <section className="section section-light">

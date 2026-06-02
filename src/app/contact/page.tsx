@@ -12,7 +12,6 @@ const services = [
 
 const phoneNumbers = [
   { label: '+60 12-274 4432', href: 'tel:+60122744432' },
-  { label: '+60 12-667 9601', href: 'tel:+60126679601' },
   { label: '03-2116 9762', href: 'tel:+60321169762' },
 ];
 
@@ -102,6 +101,18 @@ export default function ContactPage() {
                 <span className="contact-hero-channel-text">
                   <span className="contact-hero-channel-name">Email</span>
                   <span className="contact-hero-channel-value">consultant@medss.com.my</span>
+                </span>
+                <span className="contact-hero-channel-arrow" aria-hidden="true">→</span>
+              </a>
+              <a href="mailto:evelyndevid@medss.com.my" className="contact-hero-channel">
+                <span className="contact-hero-channel-icon">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" strokeLinecap="round"/>
+                  </svg>
+                </span>
+                <span className="contact-hero-channel-text">
+                  <span className="contact-hero-channel-name">Email (Evelyn)</span>
+                  <span className="contact-hero-channel-value">evelyndevid@medss.com.my</span>
                 </span>
                 <span className="contact-hero-channel-arrow" aria-hidden="true">→</span>
               </a>
@@ -222,10 +233,7 @@ export default function ContactPage() {
                   <span className="contact-form-trust-dot" aria-hidden="true" />
                   HRDC Claimable
                 </span>
-                <span className="contact-form-trust-item">
-                  <span className="contact-form-trust-dot" aria-hidden="true" />
-                  200+ Organisations
-                </span>
+
                 <span className="contact-form-trust-item">
                   <span className="contact-form-trust-dot" aria-hidden="true" />
                   Responds in 1 day
@@ -294,7 +302,7 @@ export default function ContactPage() {
                 <span className="contact-hours-day">Mon – Fri</span>
                 <span className="contact-hours-time">9:00 AM – 6:00 PM</span>
                 <span className="contact-hours-day">Saturday</span>
-                <span className="contact-hours-time">9:00 AM – 1:00 PM</span>
+                <span className="contact-hours-time contact-hours-closed">Closed</span>
                 <span className="contact-hours-day">Sunday</span>
                 <span className="contact-hours-time contact-hours-closed">Closed</span>
               </div>
@@ -320,7 +328,8 @@ export default function ContactPage() {
                 Follow &amp; Connect
               </p>
               <ul className="contact-info-list">
-                <li><a href="https://www.instagram.com/medss_trainingprovider" target="_blank" rel="noreferrer">@medss_trainingprovider</a></li>
+                <li><a href="https://www.instagram.com/medss_trainingprovider" target="_blank" rel="noreferrer">Instagram: @medss_trainingprovider</a></li>
+                <li><a href="https://www.facebook.com/groups/3202232860076709/user/61578132357226" target="_blank" rel="noreferrer">Facebook: Medss Consultancy</a></li>
                 <li><a href="https://www.medss.com.my" target="_blank" rel="noreferrer">www.medss.com.my</a></li>
               </ul>
             </div>
@@ -396,7 +405,7 @@ export default function ContactPage() {
             <div className="contact-faq-list">
               <div className="contact-faq-item">
                 <p className="contact-faq-q">Are MEDSS programmes claimable under HRD Corp?</p>
-                <p className="contact-faq-a">Yes. MEDSS is a registered HRD Corp training provider. Most programmes are eligible for claim under the HRD Corp levy. We assist with the paperwork and claim submission process.</p>
+                <p className="contact-faq-a">Yes. MEDSS is a registered HRD Corp training provider. Most programmes are eligible for claim under the HRD Corp levy.</p>
               </div>
               <div className="contact-faq-item">
                 <p className="contact-faq-q">Can training be delivered at our premises?</p>

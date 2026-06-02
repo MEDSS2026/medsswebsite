@@ -18,7 +18,6 @@ const serviceLinks = [
 
 const phoneNumbers = [
   { label: '+60 12-274 4432', href: 'tel:+60122744432' },
-  { label: '+60 12-667 9601', href: 'tel:+60126679601' },
   { label: '03-2116 9762', href: 'tel:+60321169762' },
 ];
 
@@ -59,6 +58,18 @@ export function SiteFooter() {
                   <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
                 </svg>
                 Instagram
+              </a>
+              <a
+                href="https://www.facebook.com/groups/3202232860076709/user/61578132357226"
+                target="_blank"
+                rel="noreferrer"
+                className="footer-social-btn"
+                aria-label="MEDSS on Facebook"
+              >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Facebook
               </a>
               <a
                 href="https://wa.me/60122744432"
