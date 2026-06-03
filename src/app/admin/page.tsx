@@ -9,12 +9,15 @@ import { auth, db } from '@/lib/firebase';
 interface Review {
   id: string;
   name: string;
+  position: string;
   company: string;
   rating: string;
   review: string;
   approved: boolean;
   createdAt: { seconds: number } | null;
 }
+
+type EditState = Partial<Pick<Review, 'name' | 'position' | 'company' | 'rating' | 'review'>>;
 
 export default function AdminPage() {
   const [user, setUser] = useState<User | null>(null);
@@ -24,6 +27,8 @@ export default function AdminPage() {
   const [loginError, setLoginError] = useState('');
   const [reviews, setReviews] = useState<Review[]>([]);
   const [dataLoading, setDataLoading] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editState, setEditState] = useState<EditState>({});
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
@@ -75,18 +80,26 @@ export default function AdminPage() {
     setReviews((prev) => prev.map((r) => (r.id === id ? { ...r, approved: false } : r)));
   }
 
+  function startEdit(r: Review) {
+    setEditingId(r.id);
+    setEditState({ name: r.name, position: r.position || '', company: r.company || '', rating: r.rating, review: r.review });
+  }
+
+  async function saveEdit(id: string) {
+    await updateDoc(doc(db, 'reviews', id), { ...editState });
+    setReviews((prev) => prev.map((r) => (r.id === id ? { ...r, ...editState } : r)));
+    setEditingId(null);
+    setEditState({});
+  }
+
   if (authLoading) return <div className="admin-loading">Loading...</div>;
 
   if (!user) {
     return (
       <div className="admin-login-wrap">
-        <div className="admin-login-bg" />
+        <div className="admin-login-bg" style={{ backgroundImage: 'url(/assets/training/hero-training-room.jpg)' }} />
         <div className="admin-login-overlay" />
-
-        {/* Top-left logo */}
         <img src="/assets/logos/medss-logo-white.png" alt="MEDSS" className="admin-login-top-logo" />
-
-        {/* Left — branding */}
         <div className="admin-login-left">
           <div />
           <div className="admin-login-left-body">
@@ -99,8 +112,6 @@ export default function AdminPage() {
           </div>
           <p className="admin-login-footer-text">MEDSS Training and Consultancy Sdn. Bhd. · 2026</p>
         </div>
-
-        {/* Right — form */}
         <div className="admin-login-right">
           <form className="admin-login-form" onSubmit={handleLogin}>
             <div className="admin-login-form-header">
@@ -144,7 +155,6 @@ export default function AdminPage() {
           <p className="admin-loading">Loading reviews...</p>
         ) : (
           <>
-            {/* Pending */}
             <section className="admin-section">
               <h2 className="admin-section-title">
                 Pending Reviews
@@ -156,23 +166,63 @@ export default function AdminPage() {
                 <div className="admin-cards">
                   {pending.map((r) => (
                     <div className="admin-card admin-card--pending" key={r.id}>
-                      <div className="admin-card-meta">
-                        <strong>{r.name}</strong>
-                        {r.company && <span>{r.company}</span>}
-                        <span className="admin-card-rating">{r.rating}</span>
-                      </div>
-                      <p className="admin-card-review">&ldquo;{r.review}&rdquo;</p>
-                      <div className="admin-card-actions">
-                        <button className="admin-btn admin-btn--approve" onClick={() => approve(r.id)}>✓ Approve</button>
-                        <button className="admin-btn admin-btn--reject" onClick={() => reject(r.id)}>✕ Delete</button>
-                      </div>
+                      {editingId === r.id ? (
+                        <div className="admin-edit-form">
+                          <div className="admin-edit-row">
+                            <div className="admin-edit-group">
+                              <label>Name</label>
+                              <input value={editState.name || ''} onChange={(e) => setEditState(s => ({ ...s, name: e.target.value }))} />
+                            </div>
+                            <div className="admin-edit-group">
+                              <label>Position</label>
+                              <input value={editState.position || ''} onChange={(e) => setEditState(s => ({ ...s, position: e.target.value }))} placeholder="e.g. Safety Officer" />
+                            </div>
+                          </div>
+                          <div className="admin-edit-row">
+                            <div className="admin-edit-group">
+                              <label>Company</label>
+                              <input value={editState.company || ''} onChange={(e) => setEditState(s => ({ ...s, company: e.target.value }))} />
+                            </div>
+                            <div className="admin-edit-group">
+                              <label>Rating</label>
+                              <select value={editState.rating || ''} onChange={(e) => setEditState(s => ({ ...s, rating: e.target.value }))}>
+                                <option value="★★★★★">★★★★★ Excellent</option>
+                                <option value="★★★★">★★★★ Good</option>
+                                <option value="★★★">★★★ Average</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div className="admin-edit-group">
+                            <label>Review</label>
+                            <textarea value={editState.review || ''} onChange={(e) => setEditState(s => ({ ...s, review: e.target.value }))} />
+                          </div>
+                          <div className="admin-card-actions">
+                            <button className="admin-btn admin-btn--approve" onClick={() => saveEdit(r.id)}>Save Changes</button>
+                            <button className="admin-btn admin-btn--unapprove" onClick={() => setEditingId(null)}>Cancel</button>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="admin-card-meta">
+                            <strong>{r.name}</strong>
+                            {r.position && <span className="admin-card-position">{r.position}</span>}
+                            {r.company && <span>{r.company}</span>}
+                            <span className="admin-card-rating">{r.rating}</span>
+                          </div>
+                          <p className="admin-card-review">&ldquo;{r.review}&rdquo;</p>
+                          <div className="admin-card-actions">
+                            <button className="admin-btn admin-btn--approve" onClick={() => approve(r.id)}>✓ Approve</button>
+                            <button className="admin-btn admin-btn--edit" onClick={() => startEdit(r)}>✎ Edit</button>
+                            <button className="admin-btn admin-btn--reject" onClick={() => reject(r.id)}>✕ Delete</button>
+                          </div>
+                        </>
+                      )}
                     </div>
                   ))}
                 </div>
               )}
             </section>
 
-            {/* Approved */}
             <section className="admin-section">
               <h2 className="admin-section-title">
                 Approved Reviews (Live on Website)
@@ -184,16 +234,57 @@ export default function AdminPage() {
                 <div className="admin-cards">
                   {approved.map((r) => (
                     <div className="admin-card admin-card--approved" key={r.id}>
-                      <div className="admin-card-meta">
-                        <strong>{r.name}</strong>
-                        {r.company && <span>{r.company}</span>}
-                        <span className="admin-card-rating">{r.rating}</span>
-                      </div>
-                      <p className="admin-card-review">&ldquo;{r.review}&rdquo;</p>
-                      <div className="admin-card-actions">
-                        <button className="admin-btn admin-btn--unapprove" onClick={() => unapprove(r.id)}>↩ Unpublish</button>
-                        <button className="admin-btn admin-btn--reject" onClick={() => reject(r.id)}>✕ Delete</button>
-                      </div>
+                      {editingId === r.id ? (
+                        <div className="admin-edit-form">
+                          <div className="admin-edit-row">
+                            <div className="admin-edit-group">
+                              <label>Name</label>
+                              <input value={editState.name || ''} onChange={(e) => setEditState(s => ({ ...s, name: e.target.value }))} />
+                            </div>
+                            <div className="admin-edit-group">
+                              <label>Position</label>
+                              <input value={editState.position || ''} onChange={(e) => setEditState(s => ({ ...s, position: e.target.value }))} placeholder="e.g. Safety Officer" />
+                            </div>
+                          </div>
+                          <div className="admin-edit-row">
+                            <div className="admin-edit-group">
+                              <label>Company</label>
+                              <input value={editState.company || ''} onChange={(e) => setEditState(s => ({ ...s, company: e.target.value }))} />
+                            </div>
+                            <div className="admin-edit-group">
+                              <label>Rating</label>
+                              <select value={editState.rating || ''} onChange={(e) => setEditState(s => ({ ...s, rating: e.target.value }))}>
+                                <option value="★★★★★">★★★★★ Excellent</option>
+                                <option value="★★★★">★★★★ Good</option>
+                                <option value="★★★">★★★ Average</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div className="admin-edit-group">
+                            <label>Review</label>
+                            <textarea value={editState.review || ''} onChange={(e) => setEditState(s => ({ ...s, review: e.target.value }))} />
+                          </div>
+                          <div className="admin-card-actions">
+                            <button className="admin-btn admin-btn--approve" onClick={() => saveEdit(r.id)}>Save Changes</button>
+                            <button className="admin-btn admin-btn--unapprove" onClick={() => setEditingId(null)}>Cancel</button>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="admin-card-meta">
+                            <strong>{r.name}</strong>
+                            {r.position && <span className="admin-card-position">{r.position}</span>}
+                            {r.company && <span>{r.company}</span>}
+                            <span className="admin-card-rating">{r.rating}</span>
+                          </div>
+                          <p className="admin-card-review">&ldquo;{r.review}&rdquo;</p>
+                          <div className="admin-card-actions">
+                            <button className="admin-btn admin-btn--edit" onClick={() => startEdit(r)}>✎ Edit</button>
+                            <button className="admin-btn admin-btn--unapprove" onClick={() => unapprove(r.id)}>↩ Unpublish</button>
+                            <button className="admin-btn admin-btn--reject" onClick={() => reject(r.id)}>✕ Delete</button>
+                          </div>
+                        </>
+                      )}
                     </div>
                   ))}
                 </div>

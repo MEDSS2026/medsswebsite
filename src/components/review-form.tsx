@@ -17,6 +17,7 @@ export function ReviewForm() {
     try {
       await addDoc(collection(db, 'reviews'), {
         name: data.get('name'),
+        position: data.get('position') || '',
         company: data.get('company') || '',
         rating: data.get('rating'),
         review: data.get('review'),
@@ -58,18 +59,24 @@ export function ReviewForm() {
                   <input id="review-name" type="text" name="name" placeholder="Your full name" required />
                 </div>
                 <div className="review-form-group">
+                  <label htmlFor="review-position">Position / Job Title</label>
+                  <input id="review-position" type="text" name="position" placeholder="e.g. Safety Officer" />
+                </div>
+              </div>
+              <div className="review-form-row">
+                <div className="review-form-group">
                   <label htmlFor="review-company">Company / Organisation</label>
                   <input id="review-company" type="text" name="company" placeholder="Your organisation" />
                 </div>
-              </div>
-              <div className="review-form-group">
-                <label htmlFor="review-rating">Rating *</label>
-                <select id="review-rating" name="rating" required>
-                  <option value="">Select a rating</option>
-                  <option value="★★★★★">★★★★★ Excellent</option>
-                  <option value="★★★★">★★★★ Good</option>
-                  <option value="★★★">★★★ Average</option>
-                </select>
+                <div className="review-form-group">
+                  <label htmlFor="review-rating">Rating *</label>
+                  <select id="review-rating" name="rating" required>
+                    <option value="">Select a rating</option>
+                    <option value="★★★★★">★★★★★ Excellent</option>
+                    <option value="★★★★">★★★★ Good</option>
+                    <option value="★★★">★★★ Average</option>
+                  </select>
+                </div>
               </div>
               <div className="review-form-group">
                 <label htmlFor="review-message">Your Review *</label>

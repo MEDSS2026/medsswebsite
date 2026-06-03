@@ -7,6 +7,7 @@ import { db } from '@/lib/firebase';
 interface Review {
   id: string;
   name: string;
+  position: string;
   company: string;
   rating: string;
   review: string;
@@ -16,21 +17,24 @@ const fallbackTestimonials: Review[] = [
   {
     id: 'f1',
     name: 'Ahmad H.',
-    company: 'Safety & Health Officer, Manufacturing Sector',
+    position: 'Safety & Health Officer',
+    company: 'Manufacturing Sector',
     rating: '★★★★★',
     review: 'The HIRAC training was practical and immediately applicable. Our safety committee walked away with a clear process they could implement the very next week.',
   },
   {
     id: 'f2',
     name: 'Rachel L.',
-    company: 'HR Manager, Logistics & Warehousing',
+    position: 'HR Manager',
+    company: 'Logistics & Warehousing',
     rating: '★★★★★',
     review: 'MEDSS delivered our domestic inquiry training in-house and tailored it to our actual HR cases. Exactly what we needed — not a generic slide deck.',
   },
   {
     id: 'f3',
     name: 'Siti K.',
-    company: 'Compliance Manager, Supply Chain',
+    position: 'Compliance Manager',
+    company: 'Supply Chain',
     rating: '★★★★★',
     review: 'Claiming through HRD Corp was straightforward and the MEDSS team handled all the paperwork. The security compliance programme helped us pass our TAPA audit.',
   },
@@ -80,7 +84,7 @@ export function Testimonials() {
                 </div>
                 <div>
                   <strong>{r.name}</strong>
-                  <span>{r.company}</span>
+                  <span>{[r.position, r.company].filter(Boolean).join(', ')}</span>
                 </div>
               </div>
             </div>
