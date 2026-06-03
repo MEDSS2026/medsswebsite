@@ -80,7 +80,7 @@ export default function ContactPage() {
                 </span>
                 <span className="contact-hero-channel-arrow" aria-hidden="true">→</span>
               </a>
-              <a href="tel:+60122744432" className="contact-hero-channel">
+              <a href="tel:+60321169762" className="contact-hero-channel">
                 <span className="contact-hero-channel-icon">
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
                     <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 01.97-.26 11.36 11.36 0 003.56.57 1 1 0 011 1v3.58a1 1 0 01-1 1A16.62 16.62 0 013 5a1 1 0 011-1h3.57a1 1 0 011 1 11.36 11.36 0 00.57 3.56 1 1 0 01-.26.97z"/>
@@ -88,7 +88,7 @@ export default function ContactPage() {
                 </span>
                 <span className="contact-hero-channel-text">
                   <span className="contact-hero-channel-name">Phone</span>
-                  <span className="contact-hero-channel-value">+60 12-274 4432</span>
+                  <span className="contact-hero-channel-value">03-2116 9762</span>
                 </span>
                 <span className="contact-hero-channel-arrow" aria-hidden="true">→</span>
               </a>
