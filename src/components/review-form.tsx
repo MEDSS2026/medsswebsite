@@ -1,8 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 
 export function ReviewForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -15,15 +13,18 @@ export function ReviewForm() {
     const data = new FormData(form);
 
     try {
-      await addDoc(collection(db, 'reviews'), {
-        name: data.get('name'),
-        position: data.get('position') || '',
-        company: data.get('company') || '',
-        rating: data.get('rating'),
-        review: data.get('review'),
-        approved: false,
-        createdAt: serverTimestamp(),
+      const res = await fetch('/api/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.get('name'),
+          position: data.get('position') || '',
+          company: data.get('company') || '',
+          rating: data.get('rating'),
+          review: data.get('review'),
+        }),
       });
+      if (!res.ok) throw new Error(`Submit failed (${res.status})`);
       setStatus('success');
       form.reset();
     } catch (err) {

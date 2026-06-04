@@ -1,8 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { collection, query, where, getDocs, limit } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 
 interface Review {
   id: string;
@@ -46,19 +44,10 @@ export function Testimonials() {
   useEffect(() => {
     async function fetchReviews() {
       try {
-        const q = query(
-          collection(db, 'reviews'),
-          where('approved', '==', true),
-          limit(6)
-        );
-        const snapshot = await getDocs(q);
-        if (!snapshot.empty) {
-          const data = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...(doc.data() as Omit<Review, 'id'>),
-          }));
-          setReviews(data);
-        }
+        const res = await fetch('/api/reviews?approved=1');
+        if (!res.ok) return;
+        const data: Review[] = await res.json();
+        if (data.length > 0) setReviews(data);
       } catch {
         // keep fallback on error
       }

@@ -1,10 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
-import { signInWithEmailAndPassword, signOut, onAuthStateChanged, User } from 'firebase/auth';
-import { collection, query, orderBy, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
-import { auth, db } from '@/lib/firebase';
 
 interface Review {
   id: string;
@@ -14,13 +11,13 @@ interface Review {
   rating: string;
   review: string;
   approved: boolean;
-  createdAt: { seconds: number } | null;
+  createdAt: string | null;
 }
 
 type EditState = Partial<Pick<Review, 'name' | 'position' | 'company' | 'rating' | 'review'>>;
 
 export default function AdminPage() {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<{ email: string } | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,74 +27,87 @@ export default function AdminPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editState, setEditState] = useState<EditState>({});
 
+  const fetchReviews = useCallback(async () => {
+    setDataLoading(true);
+    try {
+      const res = await fetch('/api/reviews');
+      if (!res.ok) throw new Error(`Failed to load (${res.status})`);
+      setReviews(await res.json());
+    } catch (err) {
+      console.error('Failed to load reviews:', err);
+    } finally {
+      setDataLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (u) => {
-      setUser(u);
-      setAuthLoading(false);
-    });
-    return unsub;
+    let active = true;
+    (async () => {
+      try {
+        const res = await fetch('/api/auth/me');
+        const data = await res.json();
+        if (active && data.authenticated) setUser({ email: data.email ?? '' });
+      } catch {
+        // not authenticated
+      } finally {
+        if (active) setAuthLoading(false);
+      }
+    })();
+    return () => {
+      active = false;
+    };
   }, []);
 
   useEffect(() => {
     if (user) fetchReviews();
-  }, [user]);
-
-  async function fetchReviews() {
-    setDataLoading(true);
-    try {
-      const q = query(collection(db, 'reviews'), orderBy('createdAt', 'desc'));
-      const snap = await getDocs(q);
-      setReviews(snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<Review, 'id'>) })));
-    } catch (err) {
-      console.error('Firestore fetch error:', err);
-    } finally {
-      setDataLoading(false);
-    }
-  }
+  }, [user, fetchReviews]);
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setLoginError('');
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      const code = (err as { code?: string })?.code ?? '';
-      switch (code) {
-        case 'auth/invalid-credential':
-        case 'auth/wrong-password':
-        case 'auth/user-not-found':
-        case 'auth/invalid-email':
-          setLoginError('Invalid email or password.');
-          break;
-        case 'auth/too-many-requests':
-          setLoginError('Too many attempts. Please wait a moment and try again.');
-          break;
-        case 'auth/network-request-failed':
-          setLoginError('Network error — please check your connection and try again.');
-          break;
-        case 'auth/invalid-api-key':
-        case 'auth/api-key-not-valid':
-        case 'auth/configuration-not-found':
-          setLoginError('Login is temporarily unavailable (server configuration error). Please contact the administrator.');
-          break;
-        default:
-          setLoginError(code ? `Login failed: ${code}` : 'Login failed. Please try again.');
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      if (res.ok) {
+        setUser({ email });
+        return;
       }
+      const data = await res.json().catch(() => ({}));
+      setLoginError(data.error || 'Login failed. Please try again.');
+    } catch {
+      setLoginError('Network error — please check your connection and try again.');
     }
   }
 
+  async function handleLogout() {
+    await fetch('/api/auth/logout', { method: 'POST' }).catch(() => {});
+    setUser(null);
+    setReviews([]);
+  }
+
+  async function patchReview(id: string, fields: Record<string, unknown>) {
+    await fetch(`/api/reviews/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(fields),
+    });
+  }
+
   async function approve(id: string) {
-    await updateDoc(doc(db, 'reviews', id), { approved: true });
+    await patchReview(id, { approved: true });
     setReviews((prev) => prev.map((r) => (r.id === id ? { ...r, approved: true } : r)));
   }
 
   async function reject(id: string) {
-    await deleteDoc(doc(db, 'reviews', id));
+    await fetch(`/api/reviews/${id}`, { method: 'DELETE' });
     setReviews((prev) => prev.filter((r) => r.id !== id));
   }
 
   async function unapprove(id: string) {
-    await updateDoc(doc(db, 'reviews', id), { approved: false });
+    await patchReview(id, { approved: false });
     setReviews((prev) => prev.map((r) => (r.id === id ? { ...r, approved: false } : r)));
   }
 
@@ -107,7 +117,7 @@ export default function AdminPage() {
   }
 
   async function saveEdit(id: string) {
-    await updateDoc(doc(db, 'reviews', id), { ...editState });
+    await patchReview(id, { ...editState });
     setReviews((prev) => prev.map((r) => (r.id === id ? { ...r, ...editState } : r)));
     setEditingId(null);
     setEditState({});
@@ -164,7 +174,7 @@ export default function AdminPage() {
         <img src="/assets/logos/medss-logo-color.png" alt="MEDSS" className="admin-header-logo" />
         <div className="admin-header-actions">
           <span className="admin-header-user">{user.email}</span>
-          <button className="admin-signout-btn" onClick={() => signOut(auth)}>Sign Out</button>
+          <button className="admin-signout-btn" onClick={handleLogout}>Sign Out</button>
           <Link href="/" className="admin-home-btn">← Return to Home</Link>
         </div>
       </div>
