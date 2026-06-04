@@ -1854,6 +1854,11 @@ h3 {
   .why-tile--wide {
     grid-column: span 2;
   }
+
+  /* full-width tile must not exceed the 2-column grid on tablet */
+  .why-tile--full {
+    grid-column: span 2;
+  }
 }
 
 @media (max-width: 580px) {
@@ -1862,6 +1867,11 @@ h3 {
   }
 
   .why-tile--wide {
+    grid-column: span 1;
+  }
+
+  /* full-width tile collapses to the single mobile column (was still span 3 → overflow) */
+  .why-tile--full {
     grid-column: span 1;
   }
 
