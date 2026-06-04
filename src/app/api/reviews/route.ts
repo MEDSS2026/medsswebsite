@@ -31,10 +31,12 @@ export async function GET(request: NextRequest) {
     const coll = db.collection(REVIEWS);
 
     if (approvedOnly) {
+      // Return all approved reviews (capped high for safety) so every one
+      // can be featured on the site; the homepage scrolls them when > 5.
       const docs = await coll
         .find({ approved: true })
         .sort({ createdAt: -1 })
-        .limit(6)
+        .limit(100)
         .toArray();
       return NextResponse.json(docs.map(serialize));
     }

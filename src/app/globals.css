@@ -2274,9 +2274,64 @@ h3 {
   line-height: 1.4;
 }
 
+/* Auto-scrolling reviews — used when there are more than 5 approved reviews */
+.testi-marquee-wrap {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.testi-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: max-content;
+  padding: 0 20px;
+  will-change: transform;
+  animation: marquee-scroll 60s linear infinite;
+}
+
+.testi-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.testi-marquee-track .testi-card {
+  width: 340px;
+  flex-shrink: 0;
+}
+
+/* Cards size to their own content (no stretch gaps); clamp very long
+   reviews so a single card can't dominate the scrolling row. */
+.testi-marquee-track .testi-quote {
+  flex: 0 0 auto;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testi-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
 @media (max-width: 900px) {
   .testimonials-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .testi-marquee-track {
+    gap: 16px;
+  }
+
+  .testi-marquee-track .testi-card {
+    width: 280px;
   }
 }
 
