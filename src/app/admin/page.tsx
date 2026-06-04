@@ -60,8 +60,29 @@ export default function AdminPage() {
     setLoginError('');
     try {
       await signInWithEmailAndPassword(auth, email, password);
-    } catch {
-      setLoginError('Invalid email or password.');
+    } catch (err) {
+      const code = (err as { code?: string })?.code ?? '';
+      switch (code) {
+        case 'auth/invalid-credential':
+        case 'auth/wrong-password':
+        case 'auth/user-not-found':
+        case 'auth/invalid-email':
+          setLoginError('Invalid email or password.');
+          break;
+        case 'auth/too-many-requests':
+          setLoginError('Too many attempts. Please wait a moment and try again.');
+          break;
+        case 'auth/network-request-failed':
+          setLoginError('Network error — please check your connection and try again.');
+          break;
+        case 'auth/invalid-api-key':
+        case 'auth/api-key-not-valid':
+        case 'auth/configuration-not-found':
+          setLoginError('Login is temporarily unavailable (server configuration error). Please contact the administrator.');
+          break;
+        default:
+          setLoginError(code ? `Login failed: ${code}` : 'Login failed. Please try again.');
+      }
     }
   }
 
