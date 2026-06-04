@@ -78,6 +78,11 @@ a {
   .announcement-content {
     justify-content: center;
   }
+
+  /* Hide phone + landline on mobile, keep only WhatsApp */
+  .announcement-actions .contact-link:not(.contact-whatsapp) {
+    display: none;
+  }
 }
 
 .announcement-content {

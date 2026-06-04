@@ -63,7 +63,7 @@ export function SiteHeader() {
               <span>+60 12-274 4432</span>
             </a>
             <span className="divider" aria-hidden="true">|</span>
-            <a className="contact-link" href={`https://wa.me/${primaryContact.slice(1)}`} target="_blank" rel="noreferrer">
+            <a className="contact-link contact-whatsapp" href={`https://wa.me/${primaryContact.slice(1)}`} target="_blank" rel="noreferrer">
               <svg aria-hidden="true" viewBox="0 0 24 24">
                 <path d="M12 2a9.92 9.92 0 00-8.48 15.14L3 22l4.92-1.3A9.94 9.94 0 1012 2zm5.7 14.56c-.24.68-1.39 1.3-1.92 1.33s-.5.43-3.23-1c-2.72-1.43-4.45-4.9-4.59-5.13a5.2 5.2 0 01-1-3.2 3.61 3.61 0 011.2-2.72 1.22 1.22 0 01.87-.3h.6c.2 0 .46-.07.72.55s.92 2.27 1 2.43a.57.57 0 010 .54 1.11 1.11 0 01-.16.24c-.08.1-.17.18-.25.29s-.18.18-.27.27A.58.58 0 0110 10a5.94 5.94 0 002.8 2.8.64.64 0 00.68-.07c.2-.24.86-1 1.09-1.35s.45-.27.75-.14 2 1 2.34 1.17.57.27.66.42a1.89 1.89 0 01-.62 1.73z" />
               </svg>
