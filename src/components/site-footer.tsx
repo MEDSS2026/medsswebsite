@@ -156,6 +156,7 @@ export function SiteFooter() {
         <div className="container footer-bottom-inner">
           <p className="footer-copyright">
             © 2026 MEDSS Training and Consultancy Sdn. Bhd. All rights reserved.
+            <span className="footer-credit">Designed and developed by Aurexis Solution</span>
           </p>
           <nav className="footer-legal" aria-label="Legal">
             <Link href="/privacy-policy">Privacy Policy</Link>
