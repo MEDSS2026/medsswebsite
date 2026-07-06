@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { WithId, Document } from 'mongodb';
 import { getDb, REVIEWS } from '@/lib/mongodb';
 import { isAuthed } from '@/lib/auth';
+import { REVIEW_MAX_LENGTH } from '@/lib/review-limits';
 
 export const dynamic = 'force-dynamic';
 
@@ -64,11 +65,18 @@ export async function POST(request: NextRequest) {
   const str = (v: unknown) => (v == null ? '' : String(v)).trim();
   const name = str(body.name).slice(0, 120);
   const rating = str(body.rating).slice(0, 12);
-  const review = str(body.review).slice(0, 2000);
+  const review = str(body.review);
 
   if (!name || !rating || !review) {
     return NextResponse.json(
       { error: 'Name, rating and review are required.' },
+      { status: 400 },
+    );
+  }
+
+  if (review.length > REVIEW_MAX_LENGTH) {
+    return NextResponse.json(
+      { error: `Review must be ${REVIEW_MAX_LENGTH} characters or fewer.` },
       { status: 400 },
     );
   }

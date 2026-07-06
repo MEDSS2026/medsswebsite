@@ -1093,6 +1093,10 @@ h3 {
 .review-form-group textarea { min-height: 120px; resize: vertical; }
 .review-form-submit { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; }
 .review-form-note { font-size: 0.8125rem; color: #888; margin: 0; }
+.review-label-row { display: flex; align-items: center; justify-content: space-between; }
+.review-char-count { font-size: 0.75rem; color: #888; font-variant-numeric: tabular-nums; }
+.review-char-count.at-limit { color: #dc2626; font-weight: 600; }
+.review-form-hint { font-size: 0.8125rem; color: #888; margin: 0; }
 
 .cta-full {
   background: var(--white);
@@ -2332,6 +2336,13 @@ h3 {
 
   .testi-marquee-track .testi-card {
     width: 280px;
+  }
+
+  /* Narrower cards fit fewer characters per line, so allow more lines —
+     a max-length (280 char) review still displays in full on phones. */
+  .testi-marquee-track .testi-quote {
+    -webkit-line-clamp: 9;
+    line-clamp: 9;
   }
 }
 

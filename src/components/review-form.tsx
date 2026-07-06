@@ -1,9 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { REVIEW_MAX_LENGTH } from '@/lib/review-limits';
 
 export function ReviewForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [review, setReview] = useState('');
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -27,6 +29,7 @@ export function ReviewForm() {
       if (!res.ok) throw new Error(`Submit failed (${res.status})`);
       setStatus('success');
       form.reset();
+      setReview('');
     } catch (err) {
       console.error('Submit error:', err);
       setStatus('error');
@@ -80,13 +83,29 @@ export function ReviewForm() {
                 </div>
               </div>
               <div className="review-form-group">
-                <label htmlFor="review-message">Your Review *</label>
+                <div className="review-label-row">
+                  <label htmlFor="review-message">Your Review *</label>
+                  <span
+                    className={`review-char-count${review.length >= REVIEW_MAX_LENGTH ? ' at-limit' : ''}`}
+                    aria-live="polite"
+                  >
+                    {review.length}/{REVIEW_MAX_LENGTH}
+                  </span>
+                </div>
                 <textarea
                   id="review-message"
                   name="review"
-                  placeholder="Tell us about your experience with MEDSS training or consultancy..."
+                  placeholder={`Tell us about your experience with MEDSS training or consultancy... (max ${REVIEW_MAX_LENGTH} characters)`}
+                  maxLength={REVIEW_MAX_LENGTH}
+                  value={review}
+                  onChange={(e) => setReview(e.target.value)}
+                  aria-describedby="review-message-hint"
                   required
                 />
+                <p id="review-message-hint" className="review-form-hint">
+                  Keep it within {REVIEW_MAX_LENGTH} characters so your feedback displays in
+                  full on our website.
+                </p>
               </div>
               {status === 'error' && (
                 <p className="review-form-error">Something went wrong. Please try again.</p>
