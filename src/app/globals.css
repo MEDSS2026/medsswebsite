@@ -2305,12 +2305,14 @@ h3 {
 }
 
 /* Cards size to their own content (no stretch gaps); clamp very long
-   reviews so a single card can't dominate the scrolling row. */
+   legacy reviews so a single card can't dominate the scrolling row.
+   Measured: a max-length (280 char) review wraps to 8 lines at this
+   width in Montserrat, so 9 guarantees new reviews display in full. */
 .testi-marquee-track .testi-quote {
   flex: 0 0 auto;
   display: -webkit-box;
-  -webkit-line-clamp: 7;
-  line-clamp: 7;
+  -webkit-line-clamp: 9;
+  line-clamp: 9;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -2338,11 +2340,11 @@ h3 {
     width: 280px;
   }
 
-  /* Narrower cards fit fewer characters per line, so allow more lines —
-     a max-length (280 char) review still displays in full on phones. */
+  /* Narrower cards fit fewer characters per line — a max-length
+     (280 char) review measures 11 lines here, so 12 keeps it intact. */
   .testi-marquee-track .testi-quote {
-    -webkit-line-clamp: 9;
-    line-clamp: 9;
+    -webkit-line-clamp: 12;
+    line-clamp: 12;
   }
 }
 
